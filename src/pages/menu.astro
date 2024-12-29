@@ -1,0 +1,87 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const coffees = [
+  {
+    category: 'Hot Coffee',
+    items: [
+      { name: 'Espresso', price: '3.50', description: 'Pure and intense coffee shot' },
+      { name: 'Americano', price: '4.00', description: 'Espresso with hot water' },
+      { name: 'Cappuccino', price: '4.50', description: 'Espresso with steamed milk and foam' },
+      { name: 'Latte', price: '4.50', description: 'Espresso with lots of steamed milk and foam' }
+    ]
+  },
+  {
+    category: 'Cold Coffee',
+    items: [
+      { name: 'Iced Americano', price: '4.50', description: 'Chilled espresso with cold water' },
+      { name: 'Cold Brew', price: '5.00', description: '24-hour steeped coffee served over ice' },
+      { name: 'Iced Latte', price: '5.00', description: 'Espresso with cold milk over ice' },
+      { name: 'Frappuccino', price: '5.50', description: 'Blended coffee with milk and ice' }
+    ]
+  }
+];
+---
+
+<Layout title="Menu - Brew & Bean">
+  <div class="pt-24 pb-12 bg-brown-50">
+    <div class="container mx-auto px-4">
+      <h1 class="text-5xl font-bold text-center mb-8">Our Menu</h1>
+      <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">
+        Discover our carefully curated selection of coffee beverages, made with premium beans and crafted with passion.
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        {coffees.map((category) => (
+          <div class="menu-category bg-white p-8 rounded-lg shadow-sm">
+            <h2 class="text-3xl font-bold mb-6">{category.category}</h2>
+            <div class="space-y-6">
+              {category.items.map((item) => (
+                <div class="menu-item flex justify-between items-start">
+                  <div>
+                    <h3 class="text-xl font-bold mb-1">{item.name}</h3>
+                    <p class="text-gray-600">{item.description}</p>
+                  </div>
+                  <span class="text-xl font-bold">${item.price}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Menu categories animation
+  gsap.from('.menu-category', {
+    scrollTrigger: {
+      trigger: '.menu-category',
+      start: 'top bottom',
+      toggleActions: 'play none none reverse'
+    },
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    stagger: 0.2
+  });
+
+  // Menu items animation
+  gsap.from('.menu-item', {
+    scrollTrigger: {
+      trigger: '.menu-item',
+      start: 'top bottom',
+      toggleActions: 'play none none reverse'
+    },
+    opacity: 0,
+    x: -20,
+    duration: 0.5,
+    stagger: 0.1
+  });
+</script>

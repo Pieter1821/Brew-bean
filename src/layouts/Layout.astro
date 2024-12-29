@@ -1,0 +1,155 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Welcome to Brew & Bean - Your Cozy Coffee Haven" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <nav class="fixed w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <a href="/" class="text-2xl font-bold text-brown-900">Brew & Bean</a>
+          <div class="hidden md:flex space-x-8">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/menu" class="nav-link">Menu</a>
+            <a href="/about" class="nav-link">About</a>
+            <a href="/contact" class="nav-link">Contact</a>
+          </div>
+          <button class="md:hidden" id="mobile-menu-button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="mobile-menu hidden md:hidden fixed w-full bg-white z-40 top-16">
+      <div class="container mx-auto px-4 py-4">
+        <a href="/" class="block py-2">Home</a>
+        <a href="/menu" class="block py-2">Menu</a>
+        <a href="/about" class="block py-2">About</a>
+        <a href="/contact" class="block py-2">Contact</a>
+      </div>
+    </div>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="bg-brown-900 text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4">Brew & Bean</h3>
+            <p>Your cozy coffee haven in the heart of the city.</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Hours</h3>
+            <p>Monday - Friday: 7am - 8pm</p>
+            <p>Saturday - Sunday: 8am - 6pm</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Contact</h3>
+            <p>123 Coffee Street</p>
+            <p>City, State 12345</p>
+            <p>Phone: (555) 123-4567</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Mobile menu toggle
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.querySelector('.mobile-menu');
+
+  mobileMenuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  // Navigation link hover effect
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      gsap.to(link, {
+        y: -2,
+        duration: 0.2,
+        ease: 'power1.out'
+      });
+    });
+
+    link.addEventListener('mouseleave', () => {
+      gsap.to(link, {
+        y: 0,
+        duration: 0.2,
+        ease: 'power1.out'
+      });
+    });
+  });
+</script>
+
+<style is:global>
+  :root {
+    --brown-900: #362517;
+    --brown-800: #4A3524;
+    --brown-700: #5E4431;
+    --brown-600: #72533E;
+    --brown-500: #86624B;
+    --brown-400: #9A7158;
+    --brown-300: #AE8065;
+    --brown-200: #C28F72;
+    --brown-100: #D69E7F;
+  }
+
+  html {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .nav-link {
+    position: relative;
+    color: var(--brown-900);
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--brown-900);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+</style>

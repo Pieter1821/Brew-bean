@@ -1,0 +1,148 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Brew & Bean - Coffee Shop">
+  <div class="hero min-h-screen relative overflow-hidden">
+    <img 
+      src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600" 
+      alt="Coffee shop interior" 
+      class="absolute w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative container mx-auto px-4 py-32 text-white">
+      <h1 class="hero-title text-5xl md:text-7xl font-bold mb-6">
+        Welcome to<br />Brew & Bean
+      </h1>
+      <p class="hero-text text-xl md:text-2xl mb-8 max-w-2xl">
+        Experience the perfect blend of artisanal coffee and cozy ambiance in the heart of the city.
+      </p>
+      <a href="/menu" class="hero-cta inline-block bg-brown-500 hover:bg-brown-600 text-white px-8 py-3 rounded-full text-lg transition-colors duration-300">
+        View Our Menu
+      </a>
+    </div>
+  </div>
+
+  <section class="featured-items py-24 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center mb-16">Our Signature Drinks</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="featured-item">
+          <img 
+            src="https://images.unsplash.com/photo-1541167760496-1628856ab772?w=800" 
+            alt="Specialty Latte" 
+            class="w-full h-64 object-cover rounded-lg mb-4"
+          />
+          <h3 class="text-2xl font-bold mb-2">Specialty Latte</h3>
+          <p class="text-gray-600">Our signature blend with velvety steamed milk and artistic latte art.</p>
+        </div>
+        <div class="featured-item">
+          <img 
+            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800" 
+            alt="Cold Brew" 
+            class="w-full h-64 object-cover rounded-lg mb-4"
+          />
+          <h3 class="text-2xl font-bold mb-2">Cold Brew</h3>
+          <p class="text-gray-600">Smooth and refreshing cold brew, steeped for 24 hours.</p>
+        </div>
+        <div class="featured-item">
+          <img 
+            src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800" 
+            alt="Mocha Supreme" 
+            class="w-full h-64 object-cover rounded-lg mb-4"
+          />
+          <h3 class="text-2xl font-bold mb-2">Mocha Supreme</h3>
+          <p class="text-gray-600">Rich espresso mixed with premium chocolate and whipped cream.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-preview py-24 bg-brown-50">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div class="about-text">
+          <h2 class="text-4xl font-bold mb-6">Our Story</h2>
+          <p class="text-gray-600 mb-8">
+            Founded in 2010, Brew & Bean has been serving premium coffee and creating memorable experiences for our community. Our passion for quality coffee and exceptional service drives everything we do.
+          </p>
+          <a href="/about" class="inline-block text-brown-900 font-semibold hover:text-brown-700">
+            Learn More About Us →
+          </a>
+        </div>
+        <div class="about-image">
+          <img 
+            src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800" 
+            alt="Coffee brewing" 
+            class="w-full h-96 object-cover rounded-lg"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero section animations
+  gsap.from('.hero-title', {
+    opacity: 0,
+    y: 50,
+    duration: 1,
+    delay: 0.5
+  });
+
+  gsap.from('.hero-text', {
+    opacity: 0,
+    y: 30,
+    duration: 1,
+    delay: 0.8
+  });
+
+  gsap.from('.hero-cta', {
+    opacity: 0,
+    y: 30,
+    duration: 1,
+    delay: 1.1
+  });
+
+  // Featured items animations
+  gsap.from('.featured-item', {
+    scrollTrigger: {
+      trigger: '.featured-items',
+      start: 'top center',
+      toggleActions: 'play none none reverse'
+    },
+    opacity: 0,
+    y: 50,
+    duration: 0.8,
+    stagger: 0.2
+  });
+
+  // About section animations
+  gsap.from('.about-text', {
+    scrollTrigger: {
+      trigger: '.about-preview',
+      start: 'top center',
+      toggleActions: 'play none none reverse'
+    },
+    opacity: 0,
+    x: -50,
+    duration: 0.8
+  });
+
+  gsap.from('.about-image', {
+    scrollTrigger: {
+      trigger: '.about-preview',
+      start: 'top center',
+      toggleActions: 'play none none reverse'
+    },
+    opacity: 0,
+    x: 50,
+    duration: 0.8
+  });
+</script>

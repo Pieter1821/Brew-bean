@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About - Brew & Bean">
+  <div class="pt-24 pb-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24">
+        <div class="about-content">
+          <h1 class="text-5xl font-bold mb-6">Our Story</h1>
+          <p class="text-gray-600 mb-6">
+            Founded in 2010, Brew & Bean began with a simple mission: to serve exceptional coffee in a warm, welcoming environment. What started as a small corner café has grown into a beloved community hub, where coffee lovers gather to enjoy carefully crafted beverages and meaningful connections.
+          </p>
+          <p class="text-gray-600">
+            Our commitment to quality extends from bean to cup. We source our coffee beans from sustainable farms around the world, roast them in small batches, and prepare each drink with precision and care.
+          </p>
+        </div>
+        <div class="about-image">
+          <img 
+            src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800" 
+            alt="Coffee shop interior" 
+            class="w-full h-[600px] object-cover rounded-lg"
+          />
+        </div>
+      </div>
+
+      <div class="values-section py-12 bg-brown-50 rounded-lg">
+        <h2 class="text-4xl font-bold text-center mb-12">Our Values</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+          <div class="value-card text-center">
+            <div class="icon-wrapper mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-brown-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">Quality First</h3>
+            <p class="text-gray-600">We never compromise on the quality of our coffee or service.</p>
+          </div>
+          <div class="value-card text-center">
+            <div class="icon-wrapper mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-brown-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">Sustainability</h3>
+            <p class="text-gray-600">We're committed to environmentally responsible practices.</p>
+          </div>
+          <div class="value-card text-center">
+            <div class="icon-wrapper mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-brown-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">Community</h3>
+            <p class="text-gray-600">We create spaces where people can connect and belong.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // About content animation
+  gsap.from('.about-content', {
+    scrollTrigger: {
+      trigger: '.about-content',
+      start: 'top center',
+      toggleActions: 'play none none reverse'
+    },
+    opacity: 0,
+    x: -50,
+    duration: 0.8
+  });
+
+  // About image animation
+  gsap.from('.about-image', {
+    scrollTrigger: {
+      trigger: '.about-image',
+      start: 'top center',
+      toggleActions: 'play none none reverse'
+    },
+    opacity: 0,
+    x: 50,
+    duration: 0.8
+  });
+
+  // Values cards animation
+  gsap.from('.value-card', {
+    scrollTrigger: {
+      trigger: '.values-section',
+      start: 'top center',
+      toggleActions: 'play none none reverse'
+    },
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    stagger: 0.2
+  });
+</script>
